@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+
+<body onload="checkLocalStorage()">
+    <form>
+        <label for="name">Full Name</label>
+        <br>
+        <input type="email" id="name" name="name" placeholder="Enter your name" required onChange="handleChange(event)">
+        <br>
+        <label for="age">Age</label>
+        <br>
+        <input type="number" id="age" name="age" placeholder="Enter your age" required onChange="handleChange(event)">
+        <br>
+        <label for="dob">Dob </label>
+        <br>
+        <input type="date" id="dob" name="dob" placeholder="Enter your dob" onChange="handleChange(event)">
+        <br>
+        <label for="country">Country</label>
+        <br>
+        <select id="country" name="country" onChange="handleChange(event)">
+            <option value="Sài Gòn">Sài Gòn</option>
+            <option value="Nha Trang">Nha Trang</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Củ Chi">Củ Chi</option>
+            <option value="Bình Dương">Bình Dương</option>
+            <option value="Vũng Tàu">Vũng Tàu</option>
+            <option value="Phan Thiết">Phan Thiết</option>
+        </select>
+        <br>
+        <label for="description">Description</label>
+        <br>
+        <textarea id="description" name="description" placeholder="Enter your description"
+            onChange="handleChange(event)"></textarea>
+        <br>
+        <button id="submit" type="submit" onClick="submitForm(event)">Submit</button>
+    </form>
+
+    <script>
+        var formData = {
+            name: "",
+            age: "",
+            dob: "",
+            country: document.getElementById('country').value,
+            description: ""
+        }
+        
+        function handleChange(event) {
+            var fieldName = event.target.name
+            var fieldValue = event.target.value
+
+            formData[fieldName] = fieldValue
+        }
+
+        function handleSelect(event) {
+            formData.country = event.target.value
+        }
+
+        function submitForm(event) {
+            // Prevents the default form submission behavior
+            event.preventDefault();
+
+            if (Object.values(formData).some(value => value === "")) {
+                alert("Please enter full  your information")
+            } else {
+                var message = "Name: " + formData.name + "\nAge: " + formData.age + "\nDate of Birth: " + formData.dob + "\nCountry: " + formData.country + "\nDescription: " + formData.description
+
+                alert(message);
+
+                localStorage.setItem('information', JSON.stringify(formData))
+            }
+        }
+
+        function checkLocalStorage() {
+            var savedValue = localStorage.getItem('information');
+            var formattedValue = JSON.parse(savedValue)
+
+            if (formattedValue) {
+                document.getElementById('name').value = formattedValue.name
+                document.getElementById('age').value = formattedValue.age
+                document.getElementById('dob').value = formattedValue.dob
+                document.getElementById('country').value = formattedValue.country
+                document.getElementById('description').value = formattedValue.description
+
+                formData = formattedValue
+            }
+        }
+    </script>
+</body>
+
+</html>

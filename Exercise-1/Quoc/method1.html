@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+
+<body>
+    <form>
+        <label for="name">Full Name</label>
+        <br>
+        <input type="email" id="name" name="name" placeholder="Enter your name" required>
+        <br>
+        <label for="age">Age</label>
+        <br>
+        <input type="number" id="age" name="age" placeholder="Enter your age" required>
+        <br>
+        <label for="dob">Dob </label>
+        <br>
+        <input type="date" id="dob" name="dob" placeholder="Enter your dob">
+        <br>
+        <label for="country">Country</label>
+        <br>
+        <select id="country" name="country">
+            <option value="Sài Gòn">Sài Gòn</option>
+            <option value="Nha Trang">Nha Trang</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Củ Chi">Củ Chi</option>
+            <option value="Bình Dương">Bình Dương</option>
+            <option value="Vũng Tàu">Vũng Tàu</option>
+            <option value="Phan Thiết">Phan Thiết</option>
+        </select>
+        <br>
+        <label for="description">Description</label>
+        <br>
+        <textarea id="description" name="description" placeholder="Enter your description"></textarea>
+        <br>
+        <button id="submit" type="submit">Submit</button>
+    </form>
+    
+    <script>
+        document.getElementById("submit").addEventListener("click",
+            function (event) {
+                // Prevents the default form submission behavior
+                event.preventDefault();
+
+                // Get form values
+                var name = document.getElementById("name").value;
+                var age = document.getElementById("age").value;
+                var dob = document.getElementById("dob").value;
+                var country = document.getElementById("country").value;
+                var description = document.getElementById("description").value;
+
+                // Show result
+                var messsage = "Name: " + name + "\nAge: " + age + "\nDate of Birth: " + dob + "\nCountry: " + country + "\nDescription: " + description;
+
+                console.log(name)
+
+                if (!name || !age || !dob || !country || !description) {
+                    alert("Please enter full  your information")
+                } else {
+                    alert(messsage);
+                }
+            });
+    </script>
+
+</body>
+
+</html>
